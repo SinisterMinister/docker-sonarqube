@@ -60,6 +60,9 @@ RUN set -x \
 
 COPY --chown=sonarqube:sonarqube run.sh "$SONARQUBE_HOME/bin/"
 
+# Backwards compatibility for Helm Chart users
+RUN ln -s "$SONARQUBE_HOME/bin/run.sh" "$SONARQUBE_HOME/bin/run.sh"
+
 USER sonarqube
 WORKDIR $SONARQUBE_HOME
 ENTRYPOINT ["./bin/run.sh"]
